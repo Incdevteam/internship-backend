@@ -8,6 +8,7 @@
   "scripts": {
     "build-platform": "nest build platform",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
+    "postinstall": "prisma generate",
     "start-platfrom": "nest start platform",
     "start-platform:dev": "nest start platform --watch",
     "start-platform:debug": "nest start platform --debug --watch",
