@@ -21,15 +21,17 @@ WORKDIR /home/node/dist/${SERVICE}
 
 COPY --chown=node package*.json ./
 
-RUN npm install
+RUN npm install -g pnpm
+
+RUN pnpm install --frozen-lockfile
 
 # Bundle app source code
 COPY --chown=node . .
 
-RUN npm run build:${SERVICE}
+RUN pnpm run build:${SERVICE}
 
 # Bind to all network interfaces so that it can be mapped to the host OS
 
 EXPOSE ${PORT}
 
-CMD npm run 'start:platform'
+CMD pnpm run 'start:platform'
