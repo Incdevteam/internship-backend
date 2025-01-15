@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
         ENV_TYPE = "production"
-        PORT = 3716
+        PORT = 3717
         NAMESPACE = "internshipincubator-ru"
         REGISTRY_HOSTNAME = "incdevteam"
         PROJECT = "platform"

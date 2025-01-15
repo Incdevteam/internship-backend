@@ -13,8 +13,6 @@ RUN mkdir -p /home/node/dist/${SERVICE}
 
 WORKDIR /home/node/dist/${SERVICE}
 
-RUN npm install -g pnpm
-
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
