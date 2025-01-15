@@ -1,5 +1,5 @@
 # Check out https://hub.docker.com/_/node to select a new base image
-FROM node:20.11-alpine
+FROM node:20.11-alpine as base
 ARG port
 ARG service
 ENV SERVICE=$service
@@ -17,14 +17,11 @@ WORKDIR /home/node/dist/${SERVICE}
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 
-
+FROM base as prod
 
 COPY --chown=node package*.json pnpm-lock.yaml ./prisma ./
 
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile
-
-RUN pnpm install
+RUN pnpm fetch --prod
 
 # Bundle app source code
 COPY --chown=node . .
