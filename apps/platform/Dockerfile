@@ -19,16 +19,17 @@ WORKDIR /home/node/dist/${SERVICE}
 
 
 
-COPY --chown=node package*.json ./
+COPY --chown=node package*.json pnpm-lock.yaml ./prisma ./
 
-RUN npm install -g pnpm
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile
 
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 # Bundle app source code
 COPY --chown=node . .
 
-RUN pnpm run build:${SERVICE}
+RUN pnpm build:${SERVICE}
 
 # Bind to all network interfaces so that it can be mapped to the host OS
 
