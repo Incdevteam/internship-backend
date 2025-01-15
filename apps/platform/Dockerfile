@@ -1,5 +1,7 @@
 # Check out https://hub.docker.com/_/node to select a new base image
 FROM node:20.11-alpine as base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
 ARG port
 ARG service
 ENV SERVICE=$service
@@ -7,6 +9,8 @@ ENV PORT=$port
 # Set to a non-root built-in user `node`
 
 USER node
+
+RUN corepack enable
 
 # Create app directory (with user `node`)
 RUN mkdir -p /home/node/dist/${SERVICE}
