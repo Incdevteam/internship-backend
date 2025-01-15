@@ -6,7 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build-platform": "nest build platform",
+    "build": "nest build",
+    "build:platform": "nest build platform",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "postinstall": "prisma generate",
     "start-platfrom": "nest start platform",
