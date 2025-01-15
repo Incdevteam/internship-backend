@@ -1,39 +1,34 @@
-# Check out https://hub.docker.com/_/node to select a new base image
-FROM node:20.11-alpine as base
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+# Use the official Node.js 20.11-alpine image as the base
+FROM node:20.11-alpine
+
+# Arguments to define the service and port
 ARG port
 ARG service
 ENV SERVICE=$service
 ENV PORT=$port
+
+# Install pnpm globally
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
 # Set to a non-root built-in user `node`
-
 USER node
-
-RUN corepack enable
 
 # Create app directory (with user `node`)
 RUN mkdir -p /home/node/dist/${SERVICE}
-
 WORKDIR /home/node/dist/${SERVICE}
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-
-FROM base as prod
-
-COPY --chown=node package*.json pnpm-lock.yaml ./prisma ./
-
-RUN pnpm fetch --prod
+# Copy dependency files and install dependencies
+COPY --chown=node package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
 # Bundle app source code
 COPY --chown=node . .
 
+# Build the project
 RUN pnpm build:${SERVICE}
 
-# Bind to all network interfaces so that it can be mapped to the host OS
-
+# Expose the specified port
 EXPOSE ${PORT}
 
-CMD pnpm run 'start:platform'
+# Run the service
+CMD pnpm start:platform
