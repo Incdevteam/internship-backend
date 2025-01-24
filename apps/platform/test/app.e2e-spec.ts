@@ -21,4 +21,11 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+
+  it('/check-file-service (GET) should return OK and 200', () => {
+    return request(app.getHttpServer())
+      .get('/check-file-service')
+      .expect(200)
+      .expect('OK');
+  });
 });
