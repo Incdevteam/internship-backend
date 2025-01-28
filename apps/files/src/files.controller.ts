@@ -1,12 +1,12 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { FilesService } from './files.service';
+import { MessagePattern } from '@nestjs/microservices';
 
 @Controller()
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
-
-  @Get()
-  getHello(): string {
-    return this.filesService.getHello();
+  @MessagePattern('check')
+  checkService() {
+    return this.filesService.checkService();
   }
 }
