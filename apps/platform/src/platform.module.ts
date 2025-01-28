@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { PlatformController } from './platform.controller';
+import { PlatformService } from './platform.service';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaService } from '../../../libs/core/db/prisma.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
@@ -20,7 +20,7 @@ import * as process from 'process';
       },
     ]),
   ],
-  controllers: [AppController],
-  providers: [AppService, PrismaService],
+  controllers: [PlatformController],
+  providers: [PlatformService, PrismaService],
 })
-export class AppModule {}
+export class PlatformModule {}

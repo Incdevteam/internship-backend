@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { PlatformModule } from './platform.module';
 import { HttpExceptionFilter } from '../../../libs/core/exception-handlers/http-exception.filter';
 import {
   BadRequestException,
@@ -10,8 +10,8 @@ import { useContainer } from 'class-validator';
 // import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
-  const app: INestApplication = await NestFactory.create(AppModule);
-  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+  const app: INestApplication = await NestFactory.create(PlatformModule);
+  useContainer(app.select(PlatformModule), { fallbackOnErrors: true });
   app.setGlobalPrefix('api/v1');
   app.useGlobalPipes(
     new ValidationPipe({

@@ -5,13 +5,13 @@ import {
   HttpStatus,
   Inject,
 } from '@nestjs/common';
-import { AppService } from './app.service';
+import { PlatformService } from './platform.service';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Controller()
-export class AppController {
+export class PlatformController {
   constructor(
-    private readonly appService: AppService,
+    private readonly appService: PlatformService,
     @Inject('FILES_SERVICE') private readonly filesService: ClientProxy,
   ) {}
 

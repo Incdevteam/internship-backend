@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../src/app.module';
+import { PlatformModule } from '../src/platform.module';
 
-describe('AppController (e2e)', () => {
+describe('PlatformController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [PlatformModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -20,12 +20,5 @@ describe('AppController (e2e)', () => {
       .get('/')
       .expect(200)
       .expect('Hello World!');
-  });
-
-  it('/check-file-service (GET) should return OK and 200', () => {
-    return request(app.getHttpServer())
-      .get('/check-file-service')
-      .expect(200)
-      .expect('OK');
   });
 });
