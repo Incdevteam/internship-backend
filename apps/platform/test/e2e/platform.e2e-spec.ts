@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { PlatformModule } from '../src/platform.module';
+import { PlatformModule } from '../../src/platform.module';
 
 describe('PlatformController (e2e)', () => {
   let app: INestApplication;

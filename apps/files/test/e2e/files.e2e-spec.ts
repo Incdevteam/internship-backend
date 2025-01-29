@@ -4,7 +4,7 @@ import {
   Transport,
 } from '@nestjs/microservices';
 import { ClientProxyFactory } from '@nestjs/microservices/client/client-proxy-factory';
-import { FilesModule } from '../src/files.module';
+import { FilesModule } from '../../src/files.module';
 import { NestFactory } from '@nestjs/core';
 import { firstValueFrom } from 'rxjs';
 
