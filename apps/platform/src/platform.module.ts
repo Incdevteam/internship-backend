@@ -14,7 +14,8 @@ import * as process from 'process';
         name: 'FILES_SERVICE',
         transport: Transport.TCP,
         options: {
-          host: process.env.FILES_SERVICE_HOST || '0.0.0.0',
+          host:
+            process.env.FILES_SERVICE_HOST || 'platform-files-service-service',
           port: Number(process.env.FILES_SERVICE_PORT || '3726'),
         },
       },
