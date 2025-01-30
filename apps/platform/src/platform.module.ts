@@ -4,7 +4,7 @@ import { PlatformService } from './platform.service';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaService } from '../../../libs/core/db/prisma.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import * as process from 'process';
+// import * as process from 'process';
 
 @Module({
   imports: [
@@ -14,9 +14,8 @@ import * as process from 'process';
         name: 'FILES_SERVICE',
         transport: Transport.TCP,
         options: {
-          host:
-            process.env.FILES_SERVICE_HOST || 'platform-files-service-service',
-          port: Number(process.env.FILES_SERVICE_PORT || '3726'),
+          host: 'platform-files-service-service',
+          port: Number('3726'),
         },
       },
     ]),
