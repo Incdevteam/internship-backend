@@ -3,13 +3,13 @@ pipeline {
     agent any
     environment {
         ENV_TYPE = "production"
-        PORT = 3717
+        PORT = 3726
         NAMESPACE = "internshipincubator-ru"
         REGISTRY_HOSTNAME = "incdevteam"
-        PROJECT = "platform"
-        SERVICE="platform"
+        PROJECT = "platform-files-service"
+        SERVICE="files"
         REGISTRY = "registry.hub.docker.com"
-        DEPLOYMENT_NAME = "platform-deployment"
+        DEPLOYMENT_NAME = "platform-files-service-deployment"
         IMAGE_NAME = "${env.BUILD_ID}_${env.ENV_TYPE}_${env.GIT_COMMIT}"
         DOCKER_BUILD_NAME = "${env.REGISTRY_HOSTNAME}/${env.PROJECT}:${env.IMAGE_NAME}"
     }
@@ -40,7 +40,7 @@ pipeline {
                        export NVM_DIR="$HOME/.nvm"
                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                        nvm use --lts
-                       yarn test:e2e:platform
+                       yarn test:e2e:files
                     '''
                 }
             }
