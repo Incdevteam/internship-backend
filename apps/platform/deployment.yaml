@@ -22,6 +22,16 @@ spec:
              - containerPort: PORT_CONTAINER
 
            env:
+             - name: FILES_SERVICE_PORT
+               valueFrom:
+                 secretKeyRef:
+                   name: platform-production-config-secret
+                   key: FILES_SERVICE_PORT
+             - name: FILES_SERVICE_HOST
+               valueFrom:
+                 secretKeyRef:
+                   name: platform-production-config-secret
+                   key: FILES_SERVICE_HOST
              - name: DATABASE_URL
                valueFrom:
                  secretKeyRef:
